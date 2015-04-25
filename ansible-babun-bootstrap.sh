@@ -15,6 +15,9 @@ if [ -f /etc/ansible_init_babun.completed ]
     #Setup ENV_VARs for Ansible on Babun
     export ANSIBLE_SSH_ARGS='-o ControlMaster=no'
     export ANSIBLE_HOST_KEY_CHECKING=False
+	
+    echo "Remember to setup the ssh-agent."
+
   else
     #Replace babun sudo with new fake sudo for Ansible, throwing way all sudo args.
     echo "#!/usr/bin/env bash" > /usr/bin/sudo
@@ -53,6 +56,8 @@ if [ -f /etc/ansible_init_babun.completed ]
     #Setup ENV_VARs for Ansible on Babun
     export ANSIBLE_SSH_ARGS='-o ControlMaster=no'
     export ANSIBLE_HOST_KEY_CHECKING=False
+	
+    echo "Remember to setup the ssh-agent."
   
     # touch a file to mark first app init completed
     touch /etc/ansible_init_babun.completed
