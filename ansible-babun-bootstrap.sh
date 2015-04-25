@@ -4,15 +4,15 @@ ANSIBLE_DIR=$HOME/ansible
 if [ -f /etc/ansible_init_babun.completed ]
   then
     echo "First init setting up Ansible in Babun has already been completed."
-	echo "Performing Ansible update from source, if available."
+    echo "Performing Ansible update from source, if available."
     #Setup rebase Ansible	
-	cd $ANSIBLE_DIR
-	git pull --rebase
-	git submodule update --init --recursive
-	source ./hacking/env-setup
-	cd $HOME
-	
-	#Setup ENV_VARs for Ansible on Babun
+    cd $ANSIBLE_DIR
+    git pull --rebase
+    git submodule update --init --recursive
+    source ./hacking/env-setup
+    cd $HOME
+
+    #Setup ENV_VARs for Ansible on Babun
     export ANSIBLE_SSH_ARGS='-o ControlMaster=no'
     export ANSIBLE_HOST_KEY_CHECKING=False
   else
@@ -45,12 +45,12 @@ if [ -f /etc/ansible_init_babun.completed ]
     
     #Setup Ansible from Source
     mkdir -p $ANSIBLE_DIR
-	git clone git://github.com/ansible/ansible.git --recursive $ANSIBLE_DIR
+    git clone git://github.com/ansible/ansible.git --recursive $ANSIBLE_DIR
     cd $ANSIBLE_DIR
     source ./hacking/env-setup
-	cd $HOME
+    cd $HOME
 	
-	#Setup ENV_VARs for Ansible on Babun
+    #Setup ENV_VARs for Ansible on Babun
     export ANSIBLE_SSH_ARGS='-o ControlMaster=no'
     export ANSIBLE_HOST_KEY_CHECKING=False
   
