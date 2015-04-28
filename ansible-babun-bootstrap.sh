@@ -46,8 +46,20 @@ if [ -f /etc/ansible_init_babun.completed ]
     echo "127.0.0.1" > /etc/ansible/hosts
     chmod -x /etc/ansible/hosts
 
+    #Setup Ansible from Source
+    mkdir -p $ANSIBLE_DIR
+    git clone git://github.com/ansible/ansible.git --recursive $ANSIBLE_DIR
+    cd $ANSIBLE_DIR
+    source ./hacking/env-setup
+    cd $HOME
+
+    #Setup ENV_VARs for Ansible on Babun
+    export ANSIBLE_SSH_ARGS='-o ControlMaster=no'
+    export ANSIBLE_HOST_KEY_CHECKING=False
+
+
     #Set this script to run at Babun startup
-    echo ". $HOME/ansible-babun-bootstrap/ansible-babun-bootstrap.sh" >> $HOME/.zshrc 
+    echo ". $HOME/ansible-babun-bootstrap/ansible-babun-bootstrap.sh" >> $HOME/.zshrc
     echo " "
     echo "Remember to setup the ssh-agent."
     echo " "
