@@ -11,6 +11,9 @@ if [ -f /etc/ansible_init_babun.completed ]
     git submodule update --init --recursive
     source ./hacking/env-setup
     cd $HOME
+	
+	echo "Update Ansible Vagrant Shims in bin Directory"
+	cp -r $HOME/ansible-babun-bootstrap/ansible-playbook.bat $HOME/ansible/bin/ansible-playbook.bat
 
     #Setup ENV_VARs for Ansible on Babun
     export ANSIBLE_SSH_ARGS='-o ControlMaster=no'
@@ -52,11 +55,13 @@ if [ -f /etc/ansible_init_babun.completed ]
     cd $ANSIBLE_DIR
     source ./hacking/env-setup
     cd $HOME
+	
+	echo "Copy Ansible Vagrant Shims to bin Directory"
+	cp -r $HOME/ansible-babun-bootstrap/ansible-playbook.bat $HOME/ansible/bin/ansible-playbook.bat
 
     #Setup ENV_VARs for Ansible on Babun
     export ANSIBLE_SSH_ARGS='-o ControlMaster=no'
     export ANSIBLE_HOST_KEY_CHECKING=False
-
 
     #Set this script to run at Babun startup
     echo ". $HOME/ansible-babun-bootstrap/ansible-babun-bootstrap.sh" >> $HOME/.zshrc
