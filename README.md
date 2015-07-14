@@ -6,8 +6,8 @@ Simple shell script to setup [Ansible](http://www.ansible.com/) within [Babun](h
 
 ## Installation
 
-1. Install [Babun](http://babun.github.io/) and start a terminal.
-2. Run the following command:
+* Install [Babun](http://babun.github.io/) and start a terminal.
+* Run the following command:
 
 ```
 curl -s https://raw.githubusercontent.com/tiangolo/ansible-babun-bootstrap/master/install.sh | source /dev/stdin
@@ -21,25 +21,25 @@ If you don't want to run it, you can do a manual installation.
 
 ## Manual installation
 
-1. Go to your home directory:
+* Go to your home directory:
 
 ```
 cd
 ```
 
-2. Clone this repository:
+* Clone this repository:
 
 ```
 git clone https://github.com/tiangolo/ansible-babun-bootstrap
 ```
 
-3. Enter the repository directory:
+* Enter the repository directory:
 
 ```
 cd ansible-babun-bootstrap
 ```
 
-4. Run the bootstrap script:
+* Run the bootstrap script:
 
 ```
 source ./ansible-babun-bootstrap.sh
