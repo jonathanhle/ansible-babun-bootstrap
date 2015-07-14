@@ -4,7 +4,7 @@ BOOTSTRAP_ANSIBLE_UPDATE=1
 
 CURRENT_DIR=$( pwd )
 
-if [ -f /etc/ansible_init_babun.completed ]
+if [ -f /etc/ansible-babun-bootstrap.completed ]
   then
     echo "First init setting up Ansible in Babun has already been completed."
     cd $ANSIBLE_DIR
@@ -77,7 +77,7 @@ if [ -f /etc/ansible_init_babun.completed ]
     echo "Please restart Babun!!!!"
 
     # touch a file to mark first app init completed
-    touch /etc/ansible_init_babun.completed
+    touch /etc/ansible-babun-bootstrap.completed
 
 
 fi
