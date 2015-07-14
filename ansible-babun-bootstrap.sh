@@ -1,6 +1,5 @@
 #!/usr/bin/env zsh
 ANSIBLE_DIR=$HOME/ansible
-BOOTSTRAP_ANSIBLE_UPDATE=1
 
 CURRENT_DIR=$( pwd )
 
@@ -68,8 +67,10 @@ if [ -f /etc/ansible-babun-bootstrap.completed ]
     # Disable host key checking for performance
     sed -i 's|#host_key_checking = False|host_key_checking = False|' ~/.ansible.cfg
 
-
+    BOOTSTRAP_ANSIBLE_UPDATE=1
     #Set this script to run at Babun startup
+    echo "# If you don't want to update Ansible every time set BOOTSTRAP_ANSIBLE_UPDATE=0" >> $HOME/.zshrc
+    echo "export BOOTSTRAP_ANSIBLE_UPDATE=1" >> $HOME/.zshrc
     echo "source $HOME/ansible-babun-bootstrap/ansible-babun-bootstrap.sh" >> $HOME/.zshrc
     echo " "
     echo "Remember to setup the ssh-agent."
