@@ -46,10 +46,17 @@ source ./ansible-babun-bootstrap.sh
 ```
 
 All the prerequisites will be installed and Ansible will run from: $HOME/ansible/.
+
 A file /etc/ansible/hosts will be created with a default (127.0.0.1) host.
-A file ~/.ansible.cfg will be created with default configurations, including setting paramiko as the transport.
-A bootstrap script will be added to .zshrc in $HOME.
+
+A file ~/.ansible.cfg will be created with default configurations, including setting paramiko as the transport to allow
+using passwords.
+
+A bootstrap script will be added to .zshrc in $HOME, every time you start babun it will update Ansible and setup the
+environment. If you don't want to update Ansible every time (it takes some time), you can edit ~/.zshrc and set
+BOOTSTRAP_ANSIBLE_UPDATE=0.
 
 
-    Please only use this shim with Vagrant for nonDev testing on Windows.  
-    It's slows down Ansible a good bit and isn't representative of how quick Ansible can be.
+> Please only use this shim with Vagrant for nonDev testing on Windows.
+>
+> It's slows down Ansible a good bit and isn't representative of how quick Ansible can be.
