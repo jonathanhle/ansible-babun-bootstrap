@@ -1,21 +1,53 @@
 # ansible-babun-bootstrap
-Simple shell script to setup Ansible within Babun
 
-1. Install Babun and start a terminal.
-2. Clone repo into Babun $HOME:
+## Description
 
-- cd $HOME
-- git clone https://github.com/jonathanhle/ansible-babun-bootstrap
+Simple shell script to setup [Ansible](http://www.ansible.com/) within [Babun](http://babun.github.io/).
 
-3. Run the bootstrap script:
+## Installation
 
+1. Install [Babun](http://babun.github.io/) and start a terminal.
+2. Run the following command:
 
-- cd ansible-babun-bootstrap
-- . ./ansible-babun-bootstrap.sh
+```
+curl -s https://raw.githubusercontent.com/tiangolo/ansible-babun-bootstrap/master/install.sh | source /dev/stdin
+```
 
-Be sure not to forget the extra ". ./" at the begining of the script, since we want to run the shell in the current environment.
+Note: the previous command will get a script from this repository and run it immediately, performing all the needed
+steps to install everything (the same steps described in "Manual installation").
+If you don't want to run it, you can do a manual installation.
 
-Prereqs will be installed and Ansible will run from: /home/$USERNAME/ansible/
+-----
+
+## Manual installation
+
+1. Go to your home directory:
+
+```
+cd
+```
+
+2. Clone this repository:
+
+```
+git clone https://github.com/tiangolo/ansible-babun-bootstrap
+```
+
+3. Enter the repository directory:
+
+```
+cd ansible-babun-bootstrap
+```
+
+4. Run the bootstrap script:
+
+```
+source ./ansible-babun-bootstrap.sh
+```
+
+All the prerequisites will be installed and Ansible will run from: $HOME/ansible/.
+A file /etc/ansible/hosts will be created with a default (127.0.0.1) host.
+A file ~/.ansible.cfg
 Bootstrap script will be added to .zshrc in $HOME.
 
 You'll need to change the username in the ansible-playbook.bat to your username in the sed statements and/or adjust them to fit where Babun was installed.
