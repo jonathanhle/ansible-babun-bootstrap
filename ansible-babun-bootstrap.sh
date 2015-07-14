@@ -15,10 +15,6 @@ if [ -f /etc/ansible_init_babun.completed ]
 	echo "Update Ansible Vagrant Shims in bin Directory"
 	cp -r $HOME/ansible-babun-bootstrap/ansible-playbook.bat $HOME/ansible/bin/ansible-playbook.bat
 
-    #Setup ENV_VARs for Ansible on Babun
-    export ANSIBLE_SSH_ARGS='-o ControlMaster=no'
-    export ANSIBLE_HOST_KEY_CHECKING=False
-
     echo "Remember to setup the ssh-agent."
 
   else
@@ -59,9 +55,13 @@ if [ -f /etc/ansible_init_babun.completed ]
 	echo "Copy Ansible Vagrant Shims to bin Directory"
 	cp -r $HOME/ansible-babun-bootstrap/ansible-playbook.bat $HOME/ansible/bin/ansible-playbook.bat
 
-    #Setup ENV_VARs for Ansible on Babun
-    export ANSIBLE_SSH_ARGS='-o ControlMaster=no'
-    export ANSIBLE_HOST_KEY_CHECKING=False
+    # Copy default config
+    cp $ANSIBLE_DIR/examples/ansible.cfg ~/.ansible.cfg
+    # Use paramiko to allow passwords
+    sed -i 's|transport.*$|transport = paramiko|' ~/.ansible.cfg
+    # Disable host key checking for performance
+    sed -i 's|#host_key_checking = False|host_key_checking = False|' ~/.ansible.cfg
+
 
     #Set this script to run at Babun startup
     echo ". $HOME/ansible-babun-bootstrap/ansible-babun-bootstrap.sh" >> $HOME/.zshrc
