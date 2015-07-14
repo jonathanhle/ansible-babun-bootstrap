@@ -70,7 +70,7 @@ if [ -f /etc/ansible_init_babun.completed ]
 
 
     #Set this script to run at Babun startup
-    echo ". $HOME/ansible-babun-bootstrap/ansible-babun-bootstrap.sh" >> $HOME/.zshrc
+    echo "source $HOME/ansible-babun-bootstrap/ansible-babun-bootstrap.sh" >> $HOME/.zshrc
     echo " "
     echo "Remember to setup the ssh-agent."
     echo " "
