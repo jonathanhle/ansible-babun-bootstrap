@@ -1,16 +1,22 @@
 #!/usr/bin/env zsh
 ANSIBLE_DIR=$HOME/ansible
+BOOTSTRAP_ANSIBLE_UPDATE=1
+
+CURRENT_DIR=$( pwd )
 
 if [ -f /etc/ansible_init_babun.completed ]
   then
     echo "First init setting up Ansible in Babun has already been completed."
-    echo "Performing Ansible update from source, if available."
-    #Setup rebase Ansible
     cd $ANSIBLE_DIR
-    git pull --rebase
-    git submodule update --init --recursive
+    if [ $BOOTSTRAP_ANSIBLE_UPDATE = 1 ]
+     then
+     echo "Performing Ansible update from source, if available."
+     #Setup rebase Ansible
+     git pull --rebase
+     git submodule update --init --recursive
+    fi
     source ./hacking/env-setup
-    cd $HOME
+    cd $CURRENT_DIR
 	
 	echo "Update Ansible Vagrant Shims in bin Directory"
 	cp -r $HOME/ansible-babun-bootstrap/ansible-playbook.bat $HOME/ansible/bin/ansible-playbook.bat
@@ -50,7 +56,7 @@ if [ -f /etc/ansible_init_babun.completed ]
     git clone git://github.com/ansible/ansible.git --recursive $ANSIBLE_DIR
     cd $ANSIBLE_DIR
     source ./hacking/env-setup
-    cd $HOME
+    cd $CURRENT_DIR
 	
 	echo "Copy Ansible Vagrant Shims to bin Directory"
 	cp -r $HOME/ansible-babun-bootstrap/ansible-playbook.bat $HOME/ansible/bin/ansible-playbook.bat
