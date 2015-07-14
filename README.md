@@ -47,10 +47,9 @@ source ./ansible-babun-bootstrap.sh
 
 All the prerequisites will be installed and Ansible will run from: $HOME/ansible/.
 A file /etc/ansible/hosts will be created with a default (127.0.0.1) host.
-A file ~/.ansible.cfg
-Bootstrap script will be added to .zshrc in $HOME.
+A file ~/.ansible.cfg will be created with default configurations, including setting paramiko as the transport.
+A bootstrap script will be added to .zshrc in $HOME.
 
-You'll need to change the username in the ansible-playbook.bat to your username in the sed statements and/or adjust them to fit where Babun was installed.
 
     Please only use this shim with Vagrant for nonDev testing on Windows.  
     It's slows down Ansible a good bit and isn't representative of how quick Ansible can be.
