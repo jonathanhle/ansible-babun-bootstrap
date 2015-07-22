@@ -4,6 +4,8 @@
 
 Simple shell script to setup [Ansible](http://www.ansible.com/) within [Babun](http://babun.github.io/).
 
+**I'm not longer maintaining this repo, since I've switch over to using Ansible directly on Linux.  Head over to https://github.com/tiangolo/ansible-babun-bootstrap who has a great fork.**
+
 ## Installation
 
 * Install [Babun](http://babun.github.io/) and start a terminal.
