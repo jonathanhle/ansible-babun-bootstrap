@@ -1,23 +1,24 @@
 #!/usr/bin/env zsh
 ANSIBLE_DIR=$HOME/ansible
 
-if [ -f /etc/ansible_init_babun.completed ]
+CURRENT_DIR=$( pwd )
+
+if [ -f /etc/ansible-babun-bootstrap.completed ]
   then
     echo "First init setting up Ansible in Babun has already been completed."
-    echo "Performing Ansible update from source, if available."
-    #Setup rebase Ansible
     cd $ANSIBLE_DIR
-    git pull --rebase
-    git submodule update --init --recursive
+    if [ $BOOTSTRAP_ANSIBLE_UPDATE = 1 ]
+     then
+     echo "Performing Ansible update from source, if available."
+     #Setup rebase Ansible
+     git pull --rebase
+     git submodule update --init --recursive
+    fi
     source ./hacking/env-setup
-    cd $HOME
+    cd $CURRENT_DIR
 	
 	echo "Update Ansible Vagrant Shims in bin Directory"
 	cp -r $HOME/ansible-babun-bootstrap/ansible-playbook.bat $HOME/ansible/bin/ansible-playbook.bat
-
-    #Setup ENV_VARs for Ansible on Babun
-    export ANSIBLE_SSH_ARGS='-o ControlMaster=no'
-    export ANSIBLE_HOST_KEY_CHECKING=False
 
     echo "Remember to setup the ssh-agent."
 
@@ -54,24 +55,30 @@ if [ -f /etc/ansible_init_babun.completed ]
     git clone git://github.com/ansible/ansible.git --recursive $ANSIBLE_DIR
     cd $ANSIBLE_DIR
     source ./hacking/env-setup
-    cd $HOME
+    cd $CURRENT_DIR
 	
 	echo "Copy Ansible Vagrant Shims to bin Directory"
 	cp -r $HOME/ansible-babun-bootstrap/ansible-playbook.bat $HOME/ansible/bin/ansible-playbook.bat
 
-    #Setup ENV_VARs for Ansible on Babun
-    export ANSIBLE_SSH_ARGS='-o ControlMaster=no'
-    export ANSIBLE_HOST_KEY_CHECKING=False
+    # Copy default config
+    cp $ANSIBLE_DIR/examples/ansible.cfg ~/.ansible.cfg
+    # Use paramiko to allow passwords
+    sed -i 's|transport.*$|transport = paramiko|' ~/.ansible.cfg
+    # Disable host key checking for performance
+    sed -i 's|#host_key_checking = False|host_key_checking = False|' ~/.ansible.cfg
 
+    BOOTSTRAP_ANSIBLE_UPDATE=1
     #Set this script to run at Babun startup
-    echo ". $HOME/ansible-babun-bootstrap/ansible-babun-bootstrap.sh" >> $HOME/.zshrc
+    echo "# If you don't want to update Ansible every time set BOOTSTRAP_ANSIBLE_UPDATE=0" >> $HOME/.zshrc
+    echo "export BOOTSTRAP_ANSIBLE_UPDATE=1" >> $HOME/.zshrc
+    echo "source $HOME/ansible-babun-bootstrap/ansible-babun-bootstrap.sh" >> $HOME/.zshrc
     echo " "
     echo "Remember to setup the ssh-agent."
     echo " "
     echo "Please restart Babun!!!!"
 
     # touch a file to mark first app init completed
-    touch /etc/ansible_init_babun.completed
+    touch /etc/ansible-babun-bootstrap.completed
 
 
 fi
