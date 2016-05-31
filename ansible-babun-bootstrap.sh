@@ -63,7 +63,7 @@ if [ -f /etc/ansible-babun-bootstrap.completed ]
     # Copy default config
     cp $ANSIBLE_DIR/examples/ansible.cfg ~/.ansible.cfg
     # Use paramiko to allow passwords
-    sed -i 's|transport.*$|transport = paramiko|' ~/.ansible.cfg
+    sed -i 's|#\?transport.*$|transport = paramiko|' ~/.ansible.cfg
     # Disable host key checking for performance
     sed -i 's|#host_key_checking = False|host_key_checking = False|' ~/.ansible.cfg
 

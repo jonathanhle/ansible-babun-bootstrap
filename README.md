@@ -2,7 +2,7 @@
 
 ## Description
 
-Simple shell script to setup [Ansible](http://www.ansible.com/) within [Babun](http://babun.github.io/).
+Simple shell script to setup [Ansible](http://www.ansible.com/) within [Babun](http://babun.github.io/), to allow using Ansible from Windows without needing a virtual machine.
 
 **I'm not longer maintaining this repo, since I've switch over to using Ansible directly on Linux.  Head over to https://github.com/tiangolo/ansible-babun-bootstrap who has a great fork.**
 
@@ -57,8 +57,3 @@ using passwords.
 A bootstrap script will be added to .zshrc in $HOME, every time you start babun it will update Ansible and setup the
 environment. If you don't want to update Ansible every time (it takes some time), you can edit ~/.zshrc and set
 BOOTSTRAP_ANSIBLE_UPDATE=0.
-
-
-> Please only use this shim with Vagrant for nonDev testing on Windows.
->
-> It's slows down Ansible a good bit and isn't representative of how quick Ansible can be.
